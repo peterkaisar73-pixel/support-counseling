@@ -20,10 +20,7 @@
   <div class="nav-inner">
     <a href="#top" class="brand">
       <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="9" stroke="#F3EEE1" stroke-width="1.4"/>
-          <circle cx="12" cy="12" r="4.5" stroke="#C9A25C" stroke-width="1.4"/>
-        </svg>
+        <img src="images/logo.png" alt="لوجو خدمة الدعم والمشورة" loading="lazy" onerror="this.style.display='none'">
       </span>
       <span class="brand-text">خدمة الدعم والمشورة<small>الكنيسة الرسولية — أمبابة</small></span>
     </a>
@@ -397,77 +394,114 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- BOOKING — نظام حجز جلسات المشورة -->
+<!-- BOOKING — استمارة طلب خدمة المشورة -->
 <!-- ============================================================ -->
 <section id="booking">
-  <div class="wrap">
+  <div class="wrap-narrow">
     <div class="section-head reveal">
-      <span class="eyebrow">جلسات المشورة</span>
-      <h2>احجز جلستك بسهولة</h2>
-      <p>اختر اليوم والوقت المناسبين لك، والمواعيد المحجوزة بالفعل تظهر معطّلة تلقائيًا.</p>
+      <span class="eyebrow">خدمة المشورة</span>
+      <h2>استمارة طلب جلسة مشورة</h2>
+      <p>حدد نوع الجلسة وسجّل بياناتك، وسنتواصل معك لتحديد الموعد المناسب.</p>
     </div>
 
-    <div class="booking-shell reveal">
-      <div class="calendar-box">
-        <h3>١. اختر اليوم</h3>
-        <div class="cal-nav">
-          <button type="button" id="calPrev" aria-label="الشهر السابق">‹</button>
-          <span class="cal-month" id="calMonthLabel"></span>
-          <button type="button" id="calNext" aria-label="الشهر التالي">›</button>
-        </div>
-        <div class="cal-grid" id="calGrid"></div>
+    <div class="status-row reveal">
+      <label class="status-label">نوع الجلسة</label>
+      <div class="status-toggle">
+        <label class="status-option">
+          <input type="radio" name="counselType" value="فردية" checked>
+          <span>مشورة فردية</span>
+        </label>
+        <label class="status-option">
+          <input type="radio" name="counselType" value="زوجية">
+          <span>مشورة زوجية</span>
+        </label>
+      </div>
+    </div>
 
-        <div class="slots">
-          <h4>٢. اختر الوقت المتاح</h4>
-          <div class="slot-grid" id="slotGrid">
-            <span class="slot-empty">اختر يومًا أولًا لعرض الأوقات المتاحة</span>
+    <form id="counselForm" class="reveal">
+
+      <!-- ===== فردية ===== -->
+      <div id="individualFields">
+        <div class="tablet" style="max-width:520px; margin:0 auto;">
+          <span class="tag">بيانات الطلب</span>
+          <div class="field">
+            <label for="indName">الاسم</label>
+            <input type="text" id="indName" placeholder="الاسم بالكامل">
+          </div>
+          <div class="field">
+            <label for="indAge">السن</label>
+            <input type="number" id="indAge" min="1" step="1" inputmode="numeric" pattern="[0-9]*" placeholder="مثال: 28">
+          </div>
+          <div class="field">
+            <label for="indPhone">رقم التليفون</label>
+            <input type="tel" id="indPhone" placeholder="01xxxxxxxxx">
+          </div>
+          <div class="field">
+            <label for="indChallenges">أهم التحديات</label>
+            <textarea id="indChallenges" placeholder="اكتب باختصار أهم ما تحب نتكلم فيه بالجلسة"></textarea>
           </div>
         </div>
       </div>
 
-      <div class="booking-form">
-        <h3>٣. بيانات الحجز</h3>
-        <div class="booking-selected-note" id="selectedNote">لم يتم اختيار موعد بعد</div>
-        <form id="bookingForm">
-          <div class="field">
-            <label for="bkName">الاسم</label>
-            <input type="text" id="bkName" placeholder="اكتب اسمك بالكامل" required>
+      <!-- ===== زوجية ===== -->
+      <div id="coupleFields" style="display:none;">
+        <div class="tablets">
+          <div class="tablet">
+            <span class="tag">الزوج</span>
+            <div class="field">
+              <label for="husName">اسم الزوج</label>
+              <input type="text" id="husName" placeholder="الاسم بالكامل">
+            </div>
+            <div class="field">
+              <label for="husAge">سن الزوج</label>
+              <input type="number" id="husAge" min="1" step="1" inputmode="numeric" pattern="[0-9]*" placeholder="مثال: 30">
+            </div>
+            <div class="field">
+              <label for="husPhone">رقم تليفون الزوج</label>
+              <input type="tel" id="husPhone" placeholder="01xxxxxxxxx">
+            </div>
           </div>
-          <div class="field">
-            <label for="bkPhone">رقم الهاتف</label>
-            <input type="tel" id="bkPhone" placeholder="01xxxxxxxxx" required>
-          </div>
-          <div class="field">
-            <label for="bkType">نوع الجلسة</label>
-            <select id="bkType" required>
-              <option value="">اختر نوع الجلسة</option>
-              <option value="مشورة فردية">مشورة فردية</option>
-              <option value="مشورة زوجية">مشورة زوجية</option>
-              <option value="مشورة أسرية">مشورة أسرية</option>
-              <option value="ما قبل الزواج">جلسة ما قبل الزواج</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="bkNote">وصف مختصر للحالة (اختياري)</label>
-            <textarea id="bkNote" placeholder="أي تفاصيل تودّ مشاركتها قبل الجلسة"></textarea>
-          </div>
-          <div class="submit-row" style="margin-top:16px;">
-            <button type="submit" class="submit" id="bkSubmitBtn">تأكيد الحجز</button>
-            <div class="error-msg" id="bkErrorMsg">من فضلك اختر يومًا ووقتًا أولًا.</div>
-          </div>
-        </form>
 
-        <div class="success" id="bkSuccessBox" style="padding:34px 20px;">
-          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#F3EEE1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <h3 style="font-size:20px;">تم تأكيد حجزك</h3>
-          <p id="bkSummaryText" style="font-size:14px;"></p>
+          <div class="tablet">
+            <span class="tag">الزوجة</span>
+            <div class="field">
+              <label for="wifName">اسم الزوجة</label>
+              <input type="text" id="wifName" placeholder="الاسم بالكامل">
+            </div>
+            <div class="field">
+              <label for="wifAge">سن الزوجة</label>
+              <input type="number" id="wifAge" min="1" step="1" inputmode="numeric" pattern="[0-9]*" placeholder="مثال: 27">
+            </div>
+            <div class="field">
+              <label for="wifPhone">رقم تليفون الزوجة</label>
+              <input type="tel" id="wifPhone" placeholder="01xxxxxxxxx">
+            </div>
+          </div>
+        </div>
+
+        <div class="keystone">
+          <div class="field" style="margin:0;">
+            <label for="coupleChallenges">أهم التحديات</label>
+            <textarea id="coupleChallenges" placeholder="اكتب باختصار أهم ما تحبوا نتكلم فيه بالجلسة"></textarea>
+          </div>
         </div>
       </div>
-    </div>
 
-    <p style="text-align:center; font-size:12.5px; color:var(--stone); margin-top:16px;">
-      * هذه معاينة تجريبية للحجز تعمل من المتصفح مباشرة، ويمكن ربطها لاحقًا بتقويم Google Calendar لمزامنة حقيقية للمواعيد.
-    </p>
+      <div class="submit-row">
+        <button type="submit" class="submit" id="counselSubmitBtn">إرسال طلب الجلسة</button>
+        <div class="error-msg" id="counselErrorMsg">حدث خطأ أثناء الحفظ، من فضلك حاول مرة أخرى.</div>
+      </div>
+    </form>
+
+    <div class="success" id="counselSuccessBox">
+      <div class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 13l4 4L19 7" stroke="#F3EEE1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>تم إرسال طلبك بنجاح</h3>
+      <p>استلمنا بياناتك، وسيتم التواصل معك قريبًا لتحديد موعد الجلسة.</p>
+    </div>
   </div>
 </section>
 
@@ -523,7 +557,7 @@
       <div>
         <div class="footer-brand">
           <span class="brand-mark">
-            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#F3EEE1" stroke-width="1.4"/><circle cx="12" cy="12" r="4.5" stroke="#C9A25C" stroke-width="1.4"/></svg>
+            <img src="images/logo.png" alt="لوجو خدمة الدعم والمشورة" loading="lazy" onerror="this.style.display='none'">
           </span>
           <span>خدمة الدعم والمشورة</span>
         </div>
